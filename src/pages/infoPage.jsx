@@ -177,7 +177,7 @@ const InfoPage = () => {
               <p className="mb-8 max-w-lg text-center text-sm md:text-base">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi illo officia atque iure voluptatibus necessitatibus odit cupiditate reprehenderit iusto quaerat!
               </p>
-              <a href="#" className="flex items-center gap-2 rounded px-6 py-4 text-base font-medium uppercase text-black transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 md:text-lg bg-violet-300 shadow-[4px_4px_0px_white] hover:shadow-[8px_8px_0px_white]">
+              <a href="a" className="flex items-center gap-2 rounded px-6 py-4 text-base font-medium uppercase text-black transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 md:text-lg bg-violet-300 shadow-[4px_4px_0px_white] hover:shadow-[8px_8px_0px_white]">
                 <span>Learn more</span>
                 <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
                   <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -196,7 +196,7 @@ const InfoPage = () => {
               <p className="mb-8 max-w-lg text-center text-sm md:text-base">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi illo officia atque iure voluptatibus necessitatibus odit cupiditate reprehenderit iusto quaerat!
               </p>
-              <a href="#" className="flex items-center gap-2 rounded px-6 py-4 text-base font-medium uppercase text-black transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 md:text-lg bg-pink-300 shadow-[4px_4px_0px_black] hover:shadow-[8px_8px_0px_black]">
+              <a href="b" className="flex items-center gap-2 rounded px-6 py-4 text-base font-medium uppercase text-black transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 md:text-lg bg-pink-300 shadow-[4px_4px_0px_black] hover:shadow-[8px_8px_0px_black]">
                 <span>Learn more</span>
                 <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
                   <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -214,7 +214,7 @@ const InfoPage = () => {
               <p className="mb-8 max-w-lg text-center text-sm md:text-base">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi illo officia atque iure voluptatibus necessitatibus odit cupiditate reprehenderit iusto quaerat!
               </p>
-              <a href="#" className="flex items-center gap-2 rounded px-6 py-4 text-base font-medium uppercase text-black transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 md:text-lg bg-red-300 shadow-[4px_4px_0px_white] hover:shadow-[8px_8px_0px_white]">
+              <a href="c" className="flex items-center gap-2 rounded px-6 py-4 text-base font-medium uppercase text-black transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 md:text-lg bg-red-300 shadow-[4px_4px_0px_white] hover:shadow-[8px_8px_0px_white]">
                 <span>Learn more</span>
                 <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
                   <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -232,7 +232,7 @@ const InfoPage = () => {
               <p className="mb-8 max-w-lg text-center text-sm md:text-base">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi illo officia atque iure voluptatibus necessitatibus odit cupiditate reprehenderit iusto quaerat!
               </p>
-              <a href="#" className="flex items-center gap-2 rounded px-6 py-4 text-base font-medium uppercase text-black transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 md:text-lg bg-amber-300 shadow-[4px_4px_0px_black] hover:shadow-[8px_8px_0px_black]">
+              <a href="d" className="flex items-center gap-2 rounded px-6 py-4 text-base font-medium uppercase text-black transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 md:text-lg bg-amber-300 shadow-[4px_4px_0px_black] hover:shadow-[8px_8px_0px_black]">
                 <span>Learn more</span>
                 <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
                   <line x1="5" y1="12" x2="19" y2="12"></line>
