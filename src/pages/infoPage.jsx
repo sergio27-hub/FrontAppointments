@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Loader from "../components/Loader";
-import logo from "../../src/assets/images/4.png";
+import logo from '../assets/images/4.png';
+import imagediv1 from '../assets/smartSolutionsIA/Imagediv1.webp';
+import pngwing from '../assets/images/pngwing.com.png';
+import tunning from '../assets/images/Tuning-Car-PNG-Image.png'
 
 const InfoPage = () => {
   const [loading, setLoading] = useState(true);
@@ -167,17 +170,12 @@ const InfoPage = () => {
         <main className="__className_017dd3">
           <div className="relative">
             <div className="sticky top-0 flex w-full origin-top flex-col items-center justify-center px-4" style={{ height: '500px', background: 'black', color: 'white' }}>
-              <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" className="mb-4 text-4xl" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                <line x1="16" y1="2" x2="16" y2="6"></line>
-                <line x1="8" y1="2" x2="8" y2="6"></line>
-                <line x1="3" y1="10" x2="21" y2="10"></line>
-              </svg>
-              <h3 className="mb-6 text-center text-4xl font-semibold md:text-6xl">A new type of Calendar</h3>
+              <img src={imagediv1} className="h-28 w-28" alt='imagediv1'/>
+              <h3 className="mb-6 text-center text-4xl font-semibold md:text-6xl">Comprehensive Car Solutions</h3>
               <p className="mb-8 max-w-lg text-center text-sm md:text-base">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi illo officia atque iure voluptatibus necessitatibus odit cupiditate reprehenderit iusto quaerat!
+                At Smart Solutions SA, we provide a range of services to keep your vehicle in top condition. From routine maintenance to advanced tuning and customization, our expert team is here to ensure your car performs at its best.
               </p>
-              <a href="a" className="flex items-center gap-2 rounded px-6 py-4 text-base font-medium uppercase text-black transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 md:text-lg bg-violet-300 shadow-[4px_4px_0px_white] hover:shadow-[8px_8px_0px_white]">
+              <a href="/services" className="flex items-center gap-2 rounded px-6 py-4 text-base font-medium uppercase text-black transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 md:text-lg bg-violet-300 shadow-[4px_4px_0px_white] hover:shadow-[8px_8px_0px_white]">
                 <span>Learn more</span>
                 <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
                   <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -187,16 +185,12 @@ const InfoPage = () => {
             </div>
 
             <div className="sticky top-0 flex w-full origin-top flex-col items-center justify-center px-4" style={{ height: '500px', background: 'white', color: 'black' }}>
-              <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" className="mb-4 text-4xl" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-                <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
-                <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
-                <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
-              </svg>
-              <h3 className="mb-6 text-center text-4xl font-semibold md:text-6xl">#1 in data privacy</h3>
+              <img src={logo} className="h-28 h-38" alt='logo'/>
+              <h3 className="mb-6 text-center text-4xl font-semibold md:text-6xl">Trusted Professionals</h3>
               <p className="mb-8 max-w-lg text-center text-sm md:text-base">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi illo officia atque iure voluptatibus necessitatibus odit cupiditate reprehenderit iusto quaerat!
+                Our team of certified technicians and experienced professionals are dedicated to providing the highest quality service. We use the latest technology and techniques to ensure your vehicle receives the best care possible.
               </p>
-              <a href="b" className="flex items-center gap-2 rounded px-6 py-4 text-base font-medium uppercase text-black transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 md:text-lg bg-pink-300 shadow-[4px_4px_0px_black] hover:shadow-[8px_8px_0px_black]">
+              <a href="/about" className="flex items-center gap-2 rounded px-6 py-4 text-base font-medium uppercase text-black transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 md:text-lg bg-pink-300 shadow-[4px_4px_0px_black] hover:shadow-[8px_8px_0px_black]">
                 <span>Learn more</span>
                 <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
                   <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -206,15 +200,12 @@ const InfoPage = () => {
             </div>
 
             <div className="sticky top-0 flex w-full origin-top flex-col items-center justify-center px-4" style={{ height: '500px', background: 'black', color: 'white' }}>
-              <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" className="mb-4 text-4xl" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-              </svg>
-              <h3 className="mb-6 text-center text-4xl font-semibold md:text-6xl">Use your existing tools</h3>
+              <img src={tunning} className="h-28 w-38" alt='tunning'/>
+              <h3 className="mb-6 text-center text-4xl font-semibold md:text-6xl">Cutting-Edge Technology</h3>
               <p className="mb-8 max-w-lg text-center text-sm md:text-base">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi illo officia atque iure voluptatibus necessitatibus odit cupiditate reprehenderit iusto quaerat!
+                We stay ahead of the curve by continuously integrating the latest automotive technologies into our services. Whether it's advanced diagnostics or state-of-the-art tuning, we have the tools and expertise to enhance your vehicle.
               </p>
-              <a href="c" className="flex items-center gap-2 rounded px-6 py-4 text-base font-medium uppercase text-black transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 md:text-lg bg-red-300 shadow-[4px_4px_0px_white] hover:shadow-[8px_8px_0px_white]">
+              <a href="/technology" className="flex items-center gap-2 rounded px-6 py-4 text-base font-medium uppercase text-black transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 md:text-lg bg-red-300 shadow-[4px_4px_0px_white] hover:shadow-[8px_8px_0px_white]">
                 <span>Learn more</span>
                 <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
                   <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -224,15 +215,12 @@ const InfoPage = () => {
             </div>
 
             <div className="sticky top-0 flex w-full origin-top flex-col items-center justify-center px-4" style={{ height: '500px', background: 'white', color: 'black' }}>
-              <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" className="mb-4 text-4xl" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="12" cy="8" r="7"></circle>
-                <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
-              </svg>
-              <h3 className="mb-6 text-center text-4xl font-semibold md:text-6xl">Customers love us</h3>
+              <img src={pngwing} className="h-28 w-38" alt='pngwing'/>
+              <h3 className="mb-6 text-center text-4xl font-semibold md:text-6xl">Customer Satisfaction</h3>
               <p className="mb-8 max-w-lg text-center text-sm md:text-base">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi illo officia atque iure voluptatibus necessitatibus odit cupiditate reprehenderit iusto quaerat!
+                Our commitment to excellence and customer satisfaction is unmatched. We go above and beyond to ensure our customers are happy with our services and confident in their vehicle's performance.
               </p>
-              <a href="d" className="flex items-center gap-2 rounded px-6 py-4 text-base font-medium uppercase text-black transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 md:text-lg bg-amber-300 shadow-[4px_4px_0px_black] hover:shadow-[8px_8px_0px_black]">
+              <a href="/testimonials" className="flex items-center gap-2 rounded px-6 py-4 text-base font-medium uppercase text-black transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 md:text-lg bg-amber-300 shadow-[4px_4px_0px_black] hover:shadow-[8px_8px_0px_black]">
                 <span>Learn more</span>
                 <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
                   <line x1="5" y1="12" x2="19" y2="12"></line>

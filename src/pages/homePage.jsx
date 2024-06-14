@@ -200,7 +200,7 @@ const Home = () => {
             <div className="w-full md:w-5/8 flex flex-col justify-center items-center z-20 p-8">
               <h1 className="text-4xl md:text-7xl text-transparent text-center font-medium bg-gradient-to-r from-blue-600 via-danger-accent-300 to-orange-600 bg-clip-text">SMART SOLUTIONS SAA</h1>
               <p className="text-center mt-4 text-white text-lg">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vel tincidunt turpis. Donec sit amet nisi ac magna fermentum lacinia. In hac habitasse platea dictumst.
+              At Smart Solutions SA, we are dedicated to providing comprehensive and high-quality solutions in the automotive sector. We specialize in the sale of accessories and tuning services, as well as vehicle maintenance and repair. Our goal is to deliver an exceptional experience to our customers, ensuring the safety and optimal performance of their cars. With a focus on innovation, integrity, and excellence, we strive to be the top choice for car owners. Discover how we can help you enhance your vehicle today!
               </p>
             </div>
             <div className="border-gradient flex ml-0 md:ml-28 transform -skew-x-6 w-full">
