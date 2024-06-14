@@ -9,6 +9,8 @@ const Home = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState(null);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [activeLink, setActiveLink] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,7 +24,7 @@ const Home = () => {
       if (token && userId) {
         setIsLoggedIn(true);
         try {
-          const response = await fetch(`http://localhost:3000/users/${userId}`, {
+          const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/users/${userId}`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
@@ -32,15 +34,37 @@ const Home = () => {
 
           if (!response.ok) {
             console.error('Error fetching user profile:', response.statusText);
-            navigate('/login'); // Redirect to login on error
+            navigate('/');
             return;
           }
 
           const data = await response.json();
           setUserData(data);
+
+          // Fetch roles
+          const rolesResponse = await fetch(`${process.env.REACT_APP_BACKEND_URL}/roles`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            }
+          });
+
+          if (!rolesResponse.ok) {
+            console.error('Error fetching roles:', rolesResponse.statusText);
+            return;
+          }
+
+          const rolesData = await rolesResponse.json();
+          const userRoles = data.role.map(roleId => {
+            const role = rolesData.find(role => role._id === roleId);
+            return role ? role.name : 'Unknown';
+          }).join(', ');
+
+          localStorage.setItem('roles', userRoles);
         } catch (error) {
           console.error('Error fetching user profile:', error.message);
-          navigate('/login'); // Redirect to login on error
+          navigate('/');
         }
       }
     };
@@ -49,17 +73,6 @@ const Home = () => {
     return () => clearTimeout(timer);
   }, [navigate]);
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownOpen && !event.target.closest('.dropdown-container')) {
-        setDropdownOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [dropdownOpen]);
-
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
   };
@@ -67,7 +80,9 @@ const Home = () => {
   const handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('id');
+    localStorage.removeItem('roles');
     setIsLoggedIn(false);
+    navigate('/');
   };
 
   const navigateProfile = () => {
@@ -80,17 +95,29 @@ const Home = () => {
   const navigateToServices = () => {
     navigate('/services');
   };
+  const navigateToInfo = () => {
+    navigate('/PageInfo');
+  };
 
   const navigateLogin = () => {
     navigate('/login');
   };
   const navigateInfo = () => {
     navigate('/PageInfo');
-  }
+  };
 
   const handleHomeClick = () => {
     navigate('/');
     window.location.reload();
+  };
+
+  const handleMenuToggle = () => {
+    setMenuOpen(!menuOpen);
+  };
+
+  const handleLinkClick = (link) => {
+    setActiveLink(link);
+    setMenuOpen(false);
   };
 
   if (loading) {
@@ -114,26 +141,33 @@ const Home = () => {
       <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet' />
 
       <nav className="bg-gray-800 p-3 shadow-lg w-full z-50 sticky top-0">
-        <ul className="flex justify-between items-center text-white">
-          <img className="w-16 h-26 ml-6 cursor-pointer" src={logo} alt="mainImageCorp" onClick={handleHomeClick} />
-          <div className="flex space-x-12 mr-32">
-            <li className="nav_item">
-              <a href="#about" className="nav_link active hover:text-red-400 transition duration-300 text-4xl">ABOUT CORP</a>
+        <ul className="flex flex-col md:flex-row justify-between items-center text-white">
+          <div className="flex justify-between w-full md:w-auto items-center">
+            <img className="w-16 h-26 ml-6 cursor-pointer" src={logo} alt="mainImageCorp" onClick={handleHomeClick} />
+            <div className="flex md:hidden">
+              <button id="nav-toggle" onClick={handleMenuToggle}>
+                <i className="bx bx-menu text-4xl cursor-pointer"></i>
+              </button>
+            </div>
+          </div>
+          <div className={`${menuOpen ? 'block' : 'hidden'} md:flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-12 w-full md:w-auto mt-4 md:mt-0`} id="nav-menu">
+            <li className={`nav_link ${activeLink === 'about' ? 'active' : ''}`} onClick={() => navigateToInfo() }>
+              <a href="#about" className="nav_link active hover:text-red-400 transition duration-300 text-xl md:text-4xl">ABOUT CORP</a>
             </li>
-            <li className="nav_item">
-              <a href="#about" className="nav_link hover:text-red-400 transition duration-300 text-4xl">PRODUCTS</a>
+            <li className={`nav_link ${activeLink === 'products' ? 'active' : ''}`} onClick={() => handleLinkClick('products')}>
+              <a href="#about" className="nav_link hover:text-red-400 transition duration-300 text-xl md:text-4xl">PRODUCTS</a>
             </li>
-            <li className="nav_item">
-              <a href="#skills" className="nav_link hover:text-red-400 transition duration-300 text-4xl" onClick={navigateToServices}>SERVICES</a>
+            <li className={`nav_link ${activeLink === 'services' ? 'active' : ''}`} onClick={() => { handleLinkClick('services'); navigateToServices(); }}>
+              <a href="#skills" className="nav_link hover:text-red-400 transition duration-300 text-xl md:text-4xl">SERVICES</a>
             </li>
-            <li className="nav_item">
-              <a href="#Home" className="nav_link hover:text-red-400 transition duration-300 text-4xl">HOME</a>
+            <li className={`nav_link ${activeLink === 'home' ? 'active' : ''}`} onClick={() => handleHomeClick}>
+              <a href="#Home" className="nav_link hover:text-red-400 transition duration-300 text-xl md:text-4xl">HOME</a>
             </li>
           </div>
-          <div className="relative mr-4 dropdown-container">
+          <div className="relative mt-0 md:mt-0 dropdown-container">
             {isLoggedIn && userData?.image ? (
               <img
-                src={`http://localhost:3000${userData.image}`}
+                src={`${process.env.REACT_APP_BACKEND_URL}${userData.image}`}
                 alt="Profile"
                 className='w-12 h-12 rounded-full cursor-pointer'
                 onClick={toggleDropdown}
@@ -149,8 +183,8 @@ const Home = () => {
           </div>
         </ul>
       </nav>
-      <header className="bg-white shadow-lg flex justify-between items-center p-0 bg-gradient-to-r from-gray-900 to-transparent z-10">
-        <div className="items-center justify-center w-full border-none">
+      <header className="bg-white shadow-lg flex flex-col md:flex-row justify-between items-center p-0 bg-gradient-to-r from-gray-900 to-transparent z-10">
+        <div className="w-full md:w-1/8 items-center justify-center border-none">
           <CarouselComponent />
         </div>
       </header>
@@ -159,14 +193,14 @@ const Home = () => {
         {/* ABOUT CORP */}
         <section id="about" className="relative bg-gray-50 min-h-screen flex items-center">
           <div className="absolute inset-0 bg-gradient-to-r from-gray-900 to-transparent z-10" />
-          <div className="absolute grid grid-cols-2 w-full h-full z-20 overflow-hidden">
-            <div className="w-5/8 flex flex-col justify-center items-center z-20 p-8">
-              <h1 className="text-7xl text-transparent text-center font-medium bg-gradient-to-r from-blue-600 via-danger-accent-300 to-orange-600 bg-clip-text">SMART SOLUTIONS SAA</h1>
+          <div className="absolute grid grid-cols-1 md:grid-cols-2 w-full h-full z-20 overflow-hidden">
+            <div className="w-full md:w-5/8 flex flex-col justify-center items-center z-20 p-8">
+              <h1 className="text-4xl md:text-7xl text-transparent text-center font-medium bg-gradient-to-r from-blue-600 via-danger-accent-300 to-orange-600 bg-clip-text">SMART SOLUTIONS SAA</h1>
               <p className="text-center mt-4 text-white text-lg">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vel tincidunt turpis. Donec sit amet nisi ac magna fermentum lacinia. In hac habitasse platea dictumst.
               </p>
             </div>
-            <div className="border-gradient flex ml-28 transform -skew-x-6 w-full">
+            <div className="border-gradient flex ml-0 md:ml-28 transform -skew-x-6 w-full">
               <img
                 src="https://cloudfront-us-east-1.images.arcpublishing.com/copesa/O2EOSR27FNEBZERDC3ELHFJHXU.jpg"
                 alt="about_corp"
@@ -179,7 +213,7 @@ const Home = () => {
         <section id='LinkNAV' className="bg-slate-800 min-h-screen flex items-center">
           <div className="w-full h-full flex justify-center items-center overflow-hidden absolute border-4 border-slate-900 ">
             <div className="animate-rotate absolute inset-0 h-full w-full bg-[conic-gradient(#F78F2F_50deg,transparent_180deg)]"></div>
-            <div className="grid grid-cols-3 gap-3 h-full w-[115%] overflow-hidden absolute">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 h-full w-[115%] overflow-hidden absolute">
               <div className="imageinfo transform -skew-x-6 w-full h-full relative" onClick={navigateToServices}>
                 <img
                   className='imagen object-cover h-full w-full hover:opacity-50'

@@ -16,7 +16,7 @@ const Register = () => {
     };
 
     try {
-      const response = await fetch('http://localhost:3000/users/signup', {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/users/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -28,7 +28,7 @@ const Register = () => {
         console.log('Registration successful');
         setIsSuccess(true);
         setTimeout(() => {
-          navigate('/home');
+          navigate('/');
         }, 2000); // Redirect after 2 seconds
       } else {
         console.log('Registration error');
@@ -42,7 +42,7 @@ const Register = () => {
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md p-8 space-y-6 bg-white rounded shadow-md">
+      <div className="appointment w-full max-w-md p-8 space-y-6 bg-white rounded shadow-md">
         <img src={logo} alt="logo" className="w-32 h-32 mx-auto" />
         <h2 className="text-2xl font-bold text-center">Register</h2>
         <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>

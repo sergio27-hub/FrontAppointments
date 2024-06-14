@@ -32,6 +32,28 @@ body{
     -webkit-text-fill-color: transparent;
     -webkit-text-stroke: 1px #000000;
   }
+  .text-nav-Service{
+    font-family: 'jersey 15', sans-serif;
+  }
+  .appointment{
+    font-family:Arial, Helvetica, sans-serif
+  }
+
+  .text-tittle-service{
+    font-family: 'jersey 15', sans-serif;
+    font-weight: normal;
+    font-size: 5rem;
+    background: linear-gradient(to right, 
+    #9292a0,
+    #c3c4ff,
+    #fa6400,
+    #ffa600);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 1px #ff8800d7;
+  }
+
   .Profile {
     background-image: linear-gradient(
         to bottom right,

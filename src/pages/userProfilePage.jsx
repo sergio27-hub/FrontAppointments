@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import EditProfileModal from '../components/userProfile/ModalPassword';
 import Loader from "../components/Loader";
 
-
 const UserProfile = () => {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -17,12 +16,12 @@ const UserProfile = () => {
       const userId = localStorage.getItem('id');
 
       if (!token || !userId) {
-        navigate('/login'); // Redirigir al login si no hay token o userId
+        navigate('/login');
         return;
       }
 
       try {
-        const response = await fetch(`http://localhost:3000/users/${userId}`, {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/users/${userId}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -32,29 +31,28 @@ const UserProfile = () => {
 
         if (!response.ok) {
           console.error('Error fetching user profile:', response.statusText);
-          navigate('/login'); // Redirigir al login si hay un error
+          navigate('/login');
           return;
         }
 
         const data = await response.json();
+        console.log(data);
         setUserData(data);
       } catch (error) {
-        console.error('Error fetching user profile:', error.message);
-        navigate('/login'); // Redirigir al login si hay un error
+        navigate('/login');
       } finally {
         setLoading(false);
       }
     };
 
     const fetchRoles = async () => {
-        const token = localStorage.getItem('token');
+      const token = localStorage.getItem('token');
       try {
-        const response = await fetch('http://localhost:3000/roles', {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/roles`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
-
           }
         });
 
@@ -93,7 +91,7 @@ const UserProfile = () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:3000/users/updatepatch/${userId}`, {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/users/updatepatch/${userId}`, {
         method: 'PATCH',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -113,6 +111,13 @@ const UserProfile = () => {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('id');
+    localStorage.removeItem('roles');
+    navigate('/');
+  };
+
   if (loading) {
     return <Loader />;
   }
@@ -122,64 +127,73 @@ const UserProfile = () => {
   }
 
   return (
-    <div className="Profile overflow-hidden absolute border-4 border-slate-900 w-full h-full mx-auto p-5 shadow-lg inset-0 bg-gradient-to-r from-gray-900 to-transparent z-10">
+    <div className="min-h-screen bg-gradient-to-r from-gray-900 to-transparent py-10 flex flex-col items-center Profile">
       <EditProfileModal
         show={isEditModalOpen}
         onClose={() => setIsEditModalOpen(false)}
         onSave={handleSaveProfile}
       />
-      <div className='card-content'>
-        <div className=' text-4xl flex  flex-col items-center absolute ml-2 mt-24 rounded-md bg-slate-950 px-8 py-5 font-semibold text-slate-100 duration-300 group-hover:bg-slate-950/50 group-hover:text-slate-50 group-active:bg-slate-950/80'>
-          <img 
-            src={`http://localhost:3000${userData.image}`} 
-            alt="User profile" 
-            className="w-96 h-96 rounded-full mx-auto mb-8 border-4 bg-black border-gradient-profile shadow-lg"
-          />
-          <div className="relative inline-block group">
-            <button
-              className="relative z-10 rounded-lg bg-gradient-to-br from-indigo-500 to-fuchsia-500 p-0.5 duration-300 transform group-hover:scale-110"
-              onClick={() => setIsEditModalOpen(true)}
-            >
-              <span className="block rounded-md bg-slate-950 px-4 py-2 font-semibold text-slate-100 duration-300 group-hover:bg-slate-950/50 group-hover:text-slate-50 group-active:bg-slate-950/80">
-                Edit Profile
-              </span>
-            </button>
-            <span className="pointer-events-none absolute -inset-2 z-0 transform-gpu rounded-2xl bg-gradient-to-br from-indigo-500 to-fuchsia-500 opacity-30 blur-xl transition-all duration-300 group-hover:opacity-90 group-active:opacity-50"></span>
-          </div>
-          <p className='profileUserName flex mt-4'>{userData.username}</p>
-        </div>
-        <div className='relative flex justify-center items-center'>
-          <h2 className="profileUserName z-10 text-8xl font-semibold mb-5 text-white flex mt-8 mr-80 rounded-lg">
-            <span className="rounded-md px-4 py-2 duration-300 group-hover:bg-slate-950/50 group-hover:text-slate-50 group-active:bg-slate-950/80">
-              User Profile
+      <div className="w-full flex flex-col items-center mb-8">
+        <div className="md:mt-10 md:space-x-5 flex flex-col space-y-4 md:space-y-0 justify-center md:flex-row md:flex-auto md:flex ">
+          <button
+            className="relative z-10 rounded-lg bg-gradient-to-br from-indigo-500 to-fuchsia-500 p-0.5 duration-300 transform group hover:scale-110"
+            onClick={handleLogout}
+          >
+            <span className="block rounded-md bg-slate-950 px-4 py-2 font-semibold text-slate-100 group-hover:bg-slate-950/50 group-hover:text-slate-50 group-active:bg-slate-950/80">
+              Logout
             </span>
-          </h2>
-            <div className='flex flex-col space-y-4 '>
-                <button className="relative z-10 rounded-lg bg-gradient-to-br from-indigo-500 to-fuchsia-500 p-0.5 duration-300 transform group-hover:scale-110 left-96 hover:scale-110 hover:bg-slate-950/50 hover:text-slate-50 group-active:bg-slate-950/80" onClick={() => navigate('/login')}>
-                    <span className="block rounded-md bg-slate-950 px-4 py-2 font-semibold text-slate-100 duration-300 group-hover:bg-slate-950/50 group-hover:text-slate-50 group-active:bg-slate-950/80">
-                    Logout
-                    </span>
-                </button>
-                <button className="relative z-10 rounded-lg bg-gradient-to-br from-indigo-500 to-fuchsia-500 p-0.5 duration-300 transform group-hover:scale-110 left-96 hover:scale-110 hover:bg-slate-950/50 hover:text-slate-50 group-active:bg-slate-950/80" onClick={() => navigate('/login')}>
-                    <span className="block rounded-md bg-slate-950 px-4 py-2 font-semibold text-slate-100 duration-300 group-hover:bg-slate-950/50 group-hover:text-slate-50 group-active:bg-slate-950/80">
-                    My Appointments
-                    </span>
-                </button>
-                <button className="relative z-10 rounded-lg bg-gradient-to-br from-indigo-500 to-fuchsia-500 p-0.5 duration-300 transform group-hover:scale-110 left-96 hover:scale-110 hover:bg-slate-950/50 hover:text-slate-50 group-active:bg-slate-950/80" onClick={() => navigate('/login')}>
-                    <span className="block rounded-md bg-slate-950 px-4 py-2 font-semibold text-slate-100 duration-300 group-hover:bg-slate-950/50 group-hover:text-slate-50 group-active:bg-slate-950/80">
-                        My Services
-                    </span>
-                </button>
-                <button className="relative z-10 rounded-lg bg-gradient-to-br from-indigo-500 to-fuchsia-500 p-0.5 duration-300 transform group-hover:scale-110 left-96 hover:scale-110 hover:bg-slate-950/50 hover:text-slate-50 group-active:bg-slate-950/80" onClick={() => navigate('/')}>
-                    <span className="block rounded-md bg-slate-950 px-4 py-2 font-semibold text-slate-100 duration-300 group-hover:bg-slate-950/50 group-hover:text-slate-50 group-active:bg-slate-950/80">
-                        Home
-                    </span>
-                </button>
-            </div>
-          <span className=' -inset-2 z-0 transform-gpu rounded-2xl bg-gradient-to-br from-indigo-500 to-fuchsia-500 opacity-30 blur-xl transition-all duration-300 group-hover:opacity-90 group-active:opacity-50'></span>
+            <span className="pointer-events-none absolute inset-0 z-0 transform-gpu rounded-2xl bg-gradient-to-br from-indigo-500 to-fuchsia-500 opacity-30 blur-xl transition-all duration-300 group-hover:opacity-90 group-active:opacity-50"></span>
+          </button>
+          <button
+            className="relative z-10 rounded-lg bg-gradient-to-br from-indigo-500 to-fuchsia-500 p-0.5 duration-300 transform group hover:scale-110"
+            onClick={() => navigate('/appointments')}
+          >
+            <span className="block rounded-md bg-slate-950 px-4 py-2 font-semibold text-slate-100 group-hover:bg-slate-950/50 group-hover:text-slate-50 group-active:bg-slate-950/80">
+              My Appointments
+            </span>
+            <span className="pointer-events-none absolute inset-0 z-0 transform-gpu rounded-2xl bg-gradient-to-br from-indigo-500 to-fuchsia-500 opacity-30 blur-xl transition-all duration-300 group-hover:opacity-90 group-active:opacity-50"></span>
+          </button>
+          <button
+            className="relative z-10 rounded-lg bg-gradient-to-br from-indigo-500 to-fuchsia-500 p-0.5 duration-300 transform group hover:scale-110"
+            onClick={() => navigate('/services')}
+          >
+            <span className="block rounded-md bg-slate-950 px-4 py-2 font-semibold text-slate-100 group-hover:bg-slate-950/50 group-hover:text-slate-50 group-active:bg-slate-950/80">
+              My Services
+            </span>
+            <span className="pointer-events-none absolute inset-0 z-0 transform-gpu rounded-2xl bg-gradient-to-br from-indigo-500 to-fuchsia-500 opacity-30 blur-xl transition-all duration-300 group-hover:opacity-90 group-active:opacity-50"></span>
+          </button>
+          <button
+            className="relative z-10 rounded-lg bg-gradient-to-br from-indigo-500 to-fuchsia-500 p-0.5 duration-300 transform group hover:scale-110"
+            onClick={() => navigate('/')}
+          >
+            <span className="block rounded-md bg-slate-950 px-4 py-2 font-semibold text-slate-100 group-hover:bg-slate-950/50 group-hover:text-slate-50 group-active:bg-slate-950/80">
+              Home
+            </span>
+            <span className="pointer-events-none absolute inset-0 z-0 transform-gpu rounded-2xl bg-gradient-to-br from-indigo-500 to-fuchsia-500 opacity-30 blur-xl transition-all duration-300 group-hover:opacity-90 group-active:opacity-50"></span>
+          </button>
         </div>
-        <div className='max-w-4xl mx-auto mr-96 p-8 border shadow-lg text-3xl flex  flex-col items-center mt-8 rounded-md bg-slate-950 py-22 text-slate-100'>
-          <div className="space-y-5">
+      </div>
+      <div className="w-full flex flex-col md:flex-row p-12 items-center md:items-start space-y-8 md:space-y-0 md:space-x-8">
+        <div className="bg-slate-950 rounded-md p-12 shadow-lg flex flex-col items-center space-y-8 w-96 md:w-1/3">
+          <img 
+            src={`${process.env.REACT_APP_BACKEND_URL}${userData.image}`} 
+            alt={userData.username} 
+            className="w-48 h-48 md:w-64 md:h-64 rounded-full object-contain border-4 bg-black border-gradient-profile shadow-lg transition-all duration-300 transform hover:scale-110"
+          />
+          <button
+            className="relative z-10 rounded-lg bg-gradient-to-br from-indigo-500 to-fuchsia-500 p-0.5 duration-300 transform group hover:scale-110"
+            onClick={() => setIsEditModalOpen(true)}
+          >
+            <span className="block rounded-md bg-slate-950 px-4 py-2 font-semibold text-slate-100 group-hover:bg-slate-950/50 group-hover:text-slate-50 group-active:bg-slate-950/80">
+              Edit Profile
+            </span>
+            <span className="pointer-events-none absolute inset-0 z-0 transform-gpu rounded-2xl bg-gradient-to-br from-indigo-500 to-fuchsia-500 opacity-30 blur-xl transition-all duration-300 group-hover:opacity-90 group-active:opacity-50"></span>
+          </button>
+          <p className="text-2xl md:text-5xl text-tittle-service">{userData.username}</p>
+        </div>
+        <div className="w-full md:w-2/3 mt-10 md:mt-0">
+          <h2 className="text-4xl font-semibold text-white mb-8">User Info</h2>
+          <div className="bg-slate-950 rounded-md p-8 shadow-lg space-y-5 text-white">
             <p><strong>ID:</strong> {userData._id}</p>
             <p><strong>Email:</strong> {userData.email}</p>
             <p><strong>Roles:</strong> {getRoleNames(userData.role)}</p>

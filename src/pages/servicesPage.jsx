@@ -7,8 +7,10 @@ import ServiceList from '../components/ServicesTunning/ServicesList';
 const ServicePage = () => {
   const [loading, setLoading] = useState(true);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState(null);
+  const [activeLink, setActiveLink] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,7 +24,7 @@ const ServicePage = () => {
       if (token && userId) {
         setIsLoggedIn(true);
         try {
-          const response = await fetch(`http://localhost:3000/users/${userId}`, {
+          const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/users/${userId}`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
@@ -32,7 +34,7 @@ const ServicePage = () => {
 
           if (!response.ok) {
             console.error('Error fetching user profile:', response.statusText);
-            navigate('/login'); // Redirect to login on error
+            navigate('/Services'); 
             return;
           }
 
@@ -40,7 +42,7 @@ const ServicePage = () => {
           setUserData(data);
         } catch (error) {
           console.error('Error fetching user profile:', error.message);
-          navigate('/login'); // Redirect to login on error
+          navigate('/Services'); 
         }
       }
     };
@@ -67,6 +69,7 @@ const ServicePage = () => {
   const handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('id');
+    localStorage.removeItem('roles');
     setIsLoggedIn(false);
   };
 
@@ -86,9 +89,25 @@ const ServicePage = () => {
     navigate('/login');
   };
 
+  const navigateHome = () => {
+    navigate('/');
+  };
+
+  const navigateToAbout = () => {
+    navigate('/PageInfo');
+  };
+
+  const handleMenuToggle = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   const handleHomeClick = () => {
     navigate('/');
     window.location.reload();
+  };
+  const handleLinkClick = (link) => {
+    setActiveLink(link);
+    setMenuOpen(false);
   };
 
   if (loading) {
@@ -108,27 +127,37 @@ const ServicePage = () => {
   );
 
   return (
-    <div id='Home' className='w-full h-full'>
+    <div id='Services' className='w-full h-full'>
       <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet' />
 
       <nav className="bg-gray-800 p-3 shadow-lg w-full z-50 sticky top-0">
-        <ul className="flex justify-between items-center text-white">
-          <img className="w-16 h-26 ml-6 cursor-pointer" src={logo} alt="mainImageCorp" onClick={handleHomeClick} />
-          <div className="flex space-x-12 mr-32">
-            <li className="nav_item">
-              <a href="products" className="nav_link hover:text-red-400 transition duration-300 text-4xl">PRODUCTS</a>
+        <ul className="flex flex-col md:flex-row justify-between items-center text-white">
+          <div className="flex justify-between w-full md:w-auto items-center">
+            <img className="w-16 h-26 ml-6 cursor-pointer" src={logo} alt="mainImageCorp" onClick={handleHomeClick} />
+            <div className="flex md:hidden">
+              <button id="nav-toggle" onClick={handleMenuToggle}>
+                <i className="bx bx-menu text-4xl cursor-pointer"></i>
+              </button>
+            </div>
+          </div>
+          <div className={`${menuOpen ? 'block' : 'hidden'} md:flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-12 w-full md:w-auto mt-4 md:mt-0`} id="nav-menu">
+            <li className={`nav_link ${activeLink === 'about' ? 'active' : ''}`} onClick={() => navigateToAbout()}>
+              <a href="#about" className="nav_link active hover:text-red-400 transition duration-300 text-xl md:text-4xl">ABOUT CORP</a>
             </li>
-            <li className="nav_item">
-              <a href="services" className="nav_link hover:text-red-400 transition duration-300 text-4xl" onClick={navigateToServices}>SERVICES</a>
+            <li className={`nav_link ${activeLink === 'products' ? 'active' : ''}`} onClick={() => handleLinkClick('products')}>
+              <a href="#about" className="nav_link hover:text-red-400 transition duration-300 text-xl md:text-4xl">PRODUCTS</a>
             </li>
-            <li className="nav_item">
-              <a href="" className="nav_link hover:text-red-400 transition duration-300 text-4xl" onClick={handleHomeClick}>HOME</a>
+            <li className={`nav_link ${activeLink === 'services' ? 'active' : ''}`} onClick={() => { handleLinkClick('services'); navigateToServices(); }}>
+              <a href="#skills" className="nav_link hover:text-red-400 transition duration-300 text-xl md:text-4xl">SERVICES</a>
+            </li>
+            <li className={`nav_link ${activeLink === 'home' ? 'active' : ''}`} onClick={() => navigateHome()}>
+              <a href="#Home" className="nav_link hover:text-red-400 transition duration-300 text-xl md:text-4xl">HOME</a>
             </li>
           </div>
-          <div className="relative mr-4 dropdown-container">
+          <div className="relative mt-0 md:mt-0 dropdown-container">
             {isLoggedIn && userData?.image ? (
               <img
-                src={`http://localhost:3000${userData.image}`}
+                src={`${process.env.REACT_APP_BACKEND_URL}${userData.image}`}
                 alt="Profile"
                 className='w-12 h-12 rounded-full cursor-pointer'
                 onClick={toggleDropdown}
@@ -144,7 +173,7 @@ const ServicePage = () => {
           </div>
         </ul>
       </nav>
-      <div className="services-container">
+      <div className="h-full w-full Profile">
         <ServiceList />
       </div>
     </div>
