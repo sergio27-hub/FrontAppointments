@@ -115,7 +115,7 @@ const ServiceList = () => {
           <li>
             <a
               className={`block px-4 py-2 rounded ${page === 1 ? 'bg-gray-300 cursor-not-allowed' : 'bg-blue-500 text-white hover:bg-blue-700'}`}
-              href="#"
+              href="#Adelante"
               onClick={handlePrevPage}
               aria-disabled={page === 1}
             >
@@ -126,7 +126,7 @@ const ServiceList = () => {
             <li key={i + 1}>
               <a
                 className="block px-4 py-2 rounded bg-blue-500 text-white hover:bg-blue-700"
-                href="#"
+                href="#atras"
                 onClick={(e) => handlePageClick(e, i + 1)}
               >
                 {i + 1}
@@ -136,7 +136,7 @@ const ServiceList = () => {
           <li>
             <a
               className={`block px-4 py-2 rounded ${page === totalPages ? 'bg-gray-300 cursor-not-allowed' : 'bg-blue-500 text-white hover:bg-blue-700'}`}
-              href="#"
+              href="·totalPages·"
               onClick={handleNextPage}
               aria-disabled={page === totalPages}
             >

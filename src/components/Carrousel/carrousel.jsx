@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Carousel, initTWE } from 'tw-elements';
-import image1 from '../../assets/images/5.jpg';
 import image2 from '../../assets/images/2.jpg';
+import principal from '../../assets/smartSolutionsIA/principal.webp';
 
 const CarouselComponent = () => {
   useEffect(() => {
@@ -21,7 +21,7 @@ const CarouselComponent = () => {
     <div
       id="carouselDarkVariant"
       data-twe-carousel-init
-      className="bg-black dark:bg-black dark:bg-opacity-50 overflow-hidden h-[500px] md:h-[700px] lg:h-[900px] relative w-full flex flex-col items-center justify-center"
+      className="bg-black dark:bg-black dark:bg-opacity-50 overflow-hidden object-fill h-[800px] md:h-[700px] lg:h-[900px] relative w-full flex flex-col items-center justify-center"
       data-twe-ride="carousel"
     >
       <div
@@ -58,8 +58,8 @@ const CarouselComponent = () => {
           data-twe-carousel-active
         >
           <img
-            src="https://files.oaiusercontent.com/file-31ymCy0ndNu3DQgtv1Axc3ag?se=2024-06-11T14%3A34%3A31Z&sp=r&sv=2023-11-03&sr=b&rscc=max-age%3D31536000%2C%20immutable&rscd=attachment%3B%20filename%3Df827a659-9ad8-4d70-9ca3-3b41c8058167.webp&sig=kenMDw5tN4AqKuhJ0tPyUDm8DbXH1QUN4nFan40Ztkc%3D"
-            className="block w-full h-[500px] md:h-[700px] lg:h-[900px] object-fill"
+            src={principal}
+            className="block w-full h-[800px] md:h-[700px] lg:h-[900px] md:object-fill lg:object-fill object-scale-down"
             alt="Motorbike Smoke"
           />
           <div className="absolute inset-x-[15%] bottom-5 hidden py-5 text-center text-black md:block">
@@ -73,7 +73,7 @@ const CarouselComponent = () => {
         >
           <img
             src={image2}
-            className="block w-full h-[500px] md:h-[700px] lg:h-[900px] object-fill"
+            className="block w-full h-[800px] md:h-[700px] lg:h-[900px] md:object-fill lg:object-fill object-scale-down"
             alt="Mountaintop"
           />
           <div className="absolute inset-x-[15%] bottom-5 hidden py-5 text-center text-black md:block">
@@ -90,7 +90,7 @@ const CarouselComponent = () => {
         >
           <img
             src="https://cdn.autobild.es/sites/navi.axelspringer.es/public/media/image/2018/09/estilos-tuning-desaparecer_4.jpg?tf=3840x"
-            className="block w-full h-[500px] md:h-[700px] lg:h-[900px] object-fill"
+            className="block w-full h-[800px] md:h-[700px] lg:h-[900px] md:object-fill lg:object-fill object-scale-down"
             alt="Woman Reading a Book"
           />
           <div className="absolute inset-x-[15%] bottom-5 hidden py-5 text-center text-black md:block">

@@ -3,6 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import Loader from "../components/Loader";
 import logo from "../../src/assets/images/4.png";
 import CarouselComponent from '../components/Carrousel/carrousel';
+import Service from '../assets/smartSolutionsIA/Service.webp';
+import Product from '../assets/smartSolutionsIA/Products.webp';
+import Info from '../assets/smartSolutionsIA/Info.webp';
 
 const Home = () => {
   const [loading, setLoading] = useState(true);
@@ -217,7 +220,7 @@ const Home = () => {
               <div className="imageinfo transform -skew-x-6 w-full h-full relative" onClick={navigateToServices}>
                 <img
                   className='imagen object-cover h-full w-full hover:opacity-50'
-                  src="https://files.oaiusercontent.com/file-rVIRxtAQIMK82TBh73eKiiOE?se=2024-06-11T15%3A36%3A45Z&sp=r&sv=2023-11-03&sr=b&rscc=max-age%3D31536000%2C%20immutable&rscd=attachment%3B%20filename%3D4569aafc-57d5-4330-9460-3bb83fef2f1e.webp&sig=/yLeDdQFaGUiPdB/mYg8XIFIQFDxoRiEmOPOLtuBBBE%3D" alt="ServiceNav" />
+                  src={Service} alt="ServiceNav" />
                 <div className="absolute inset-0 flex items-center justify-center text-white text-5xl font-bold opacity-0 hover:opacity-100 transition-opacity duration-300">
                   <p className='p-2 box-border shadow-sky-700 text-white shadow-md rounded-lg'>SERVICES</p>
                 </div>
@@ -225,7 +228,7 @@ const Home = () => {
               <div className="imageinfo transform -skew-x-6 w-full h-full relative">
                 <img
                   className='imagen object-cover h-full w-full hover:opacity-50'
-                  src="https://files.oaiusercontent.com/file-KTEyalLSfMO9YmO51AzpklQC?se=2024-06-11T15%3A14%3A57Z&sp=r&sv=2023-11-03&sr=b&rscc=max-age%3D31536000%2C%20immutable&rscd=attachment%3B%20filename%3D0a39f9fe-d148-474c-92b6-c404ca3d9644.webp&sig=dAEOXRde/V5wojBYl/7oj6MeX5OwltJGCTo1OB06JTY%3D" alt="ProductsNav" />
+                  src={Product} alt="ProductsNav" />
                 <div className="absolute inset-0 flex items-center justify-center text-white text-5xl font-bold opacity-0 hover:opacity-100 transition-opacity duration-300">
                   <p className='p-2 box-border shadow-sky-700 text-white shadow-md rounded-lg'>PRODUCTS</p>
                 </div>
@@ -233,7 +236,7 @@ const Home = () => {
               <div className="imageinfo transform -skew-x-6 w-full h-full relative" onClick={navigateInfo}>
                 <img 
                   className='imagen object-cover h-full w-full opacity-100'
-                  src="https://files.oaiusercontent.com/file-31ymCy0ndNu3DQgtv1Axc3ag?se=2024-06-11T14%3A34%3A31Z&sp=r&sv=2023-11-03&sr=b&rscc=max-age%3D31536000%2C%20immutable&rscd=attachment%3B%20filename%3Df827a659-9ad8-4d70-9ca3-3b41c8058167.webp&sig=kenMDw5tN4AqKuhJ0tPyUDm8DbXH1QUN4nFan40Ztkc%3D" alt="InfoCorp" />
+                  src={Info} alt="InfoCorp" />
                 <div className="absolute inset-0 flex items-center justify-center text-5xl font-bold opacity-0 hover:opacity-100 transition-opacity duration-300">
                   <p className='p-2 box-border shadow-sky-700 text-white shadow-md rounded-lg'>CORPORATION</p>
                 </div>
